@@ -3,7 +3,7 @@ import { AwsConnect } from '../types.generated'
 
 export const validateToken = (jwtToken: string): AwsConnect => {
   try {
-    const decodedJwtToken = <AwsConnect>jwt.verify(jwtToken, process.env.TOKEN_SECRET || '')
+    const decodedJwtToken = <AwsConnect>jwt.verify(jwtToken, process.env.TOKEN_SECRET ?? 'secret')
     if (decodedJwtToken) {
       return decodedJwtToken
     } else {

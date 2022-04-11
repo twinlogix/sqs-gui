@@ -68,9 +68,9 @@ export const resolvers: Resolvers<APIContext> = {
       try {
         const sqs = createSQS(args.aws)
         await sqs.listQueues().promise()
-        return jwt.sign(args.aws, `${process.env.TOKEN_SECRET}`, {}) // never expire token
+        return jwt.sign(args.aws, process.env.TOKEN_SECRET ?? 'secret', {}) // never expire token
       } catch (e) {
-        throw new Error('Unable to connect the the SQS queue.')
+        throw new Error(`Unable to connect the the SQS queue. ${(e as Error).message}`)
       }
     },
     createQueue: async (parent, args, context, info) => {
