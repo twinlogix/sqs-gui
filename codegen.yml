@@ -1,0 +1,36 @@
+overwrite: true
+schema:
+  - packages/api/src/graphql/**/**.typedefs.ts
+generates:
+  packages/api/src/graphql/types.generated.ts:
+    plugins:
+      - typescript
+    config:
+      enumsAsConst: true
+      skipTypename: true
+      scalars:
+        Date: Date
+  packages/api/src/graphql/resolvers.generated.ts:
+    plugins:
+      - add:
+          content:
+            - import { PartialDeep } from 'type-fest'
+            - import * as types from './types.generated'
+      - typescript-resolvers
+    config:
+      resolverTypeWrapperSignature: PartialDeep<T>
+      contextType: ./context/graphql.context#APIContext
+      namespacedImportName: types
+  packages/web/src/api/api.generated.ts:
+    documents:
+      - 'packages/web/src/api/**/*.ts'
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      namingConvention: keep
+      enumsAsConst: true
+      skipTypename: true
+      scalars:
+        Date: Date

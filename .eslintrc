@@ -1,0 +1,13 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended"],
+  "rules": {
+    "@typescript-eslint/ban-types": "warn"
+  },
+  "parserOptions": {
+    "project": ["./tsconfig.json", "./packages/core/tsconfig.json", "./packages/api/tsconfig.json", "./packages/jobs/tsconfig.json", "./packages/lambdas/tsconfig.json"]
+  },
+  "ignorePatterns": ["packages/migration/**/*.js"]
+}
