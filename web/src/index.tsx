@@ -6,7 +6,7 @@ import 'antd/dist/antd.css';
 import './index.css';
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_API_URL ?? 'http://localhost:4000/graphql'
+  uri: '/graphql'
 });
 
 const authMiddlewareLink = new ApolloLink((operation, forward) => {

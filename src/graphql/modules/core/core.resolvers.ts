@@ -39,7 +39,6 @@ export const resolvers: Resolvers<APIContext> = {
       )
       return (queues.QueueUrls ?? []).map((q) => {
         const name = getNameFromURL(q)
-        console.log(name)
         const attributes = queuesAttributes.find((qa) => name === getNameFromARN(qa.Attributes!.QueueArn!))
         return {
           URL: q,
